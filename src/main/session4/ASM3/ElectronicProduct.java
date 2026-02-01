@@ -3,8 +3,19 @@ package main.session4.ASM3;
 public class ElectronicProduct extends Product{
     private int warrantyMonths;
 
+    public ElectronicProduct() {
+    }
+
     public ElectronicProduct(String productId, String name, double price, int warrantyMonths) {
         super(productId, name, price);
+        this.warrantyMonths = warrantyMonths;
+    }
+
+    public int getWarrantyMonths() {
+        return warrantyMonths;
+    }
+
+    public void setWarrantyMonths(int warrantyMonths) {
         this.warrantyMonths = warrantyMonths;
     }
 
