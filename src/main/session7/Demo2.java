@@ -1,19 +1,17 @@
 package main.session7;
 
+import main.database.Database;
+
 import java.sql.*;
 import java.util.Scanner;
 
 public class Demo2 {
     public static void main(String[] args) {
-        String connectionString = "jdbc:mysql://localhost:3306/t2307e_jp";
-        String user = "root";
-        String password = "";
-        String driver = "com.mysql.cj.jdbc.Driver";
+
 
         try {
-            Class.forName(driver);
-            Connection conn = DriverManager.getConnection(connectionString,user,password);
-            Statement stt = conn.createStatement();
+            Database db =  Database.getInstance();
+            Statement stt = db.getStatement();
 
 //            String sql1 = "INSERT INTO subject (name, hours) VALUES ('toan', 4)";
 //            stt.execute(sql1);
@@ -25,7 +23,7 @@ public class Demo2 {
 //            stt.execute(sql3);
 
             String sql1 = "INSERT INTO subject (name, hours) VALUES(?,?)";
-            PreparedStatement pt = conn.prepareStatement(sql1);
+            PreparedStatement pt = db.getPreparedStatement(sql1);
             Scanner sc = new Scanner(System.in);
             System.out.print("Nhập tên môn: ");
             pt.setString(1,sc.nextLine());
@@ -34,6 +32,7 @@ public class Demo2 {
             pt.execute();
 
             String sql = "select * from subject";
+
             ResultSet rs = stt.executeQuery(sql);
             while (rs.next()){
                 Integer id = rs.getInt("id");
